@@ -4,6 +4,7 @@ const Person = require('../models/personSchema')
 
 
 //***********************************************************************//
+//http://localhost:6000/person/newperson
 //add new one person Post 
 router.post('/newperson', (req, res) => {
     let newPerson = new Person(req.body)
@@ -14,6 +15,7 @@ router.post('/newperson', (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/addmany
 //add many records person with model.create()
 router.post('/addmany', async (req, res) => {
     try {
@@ -29,6 +31,7 @@ router.post('/addmany', async (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/getperson
 //get all person 
 router.get('/getperson', async (req, res) => {
     try {
@@ -42,6 +45,7 @@ router.get('/getperson', async (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/findname
 //Find all the persons having a given name
 router.get('/findname', async (req, res) => {
     try {
@@ -55,6 +59,7 @@ router.get('/findname', async (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/(write id)
 //Use model.findById() to Search Your Database By _id
 router.get('/:id', async (req, res) => {
     try {
@@ -68,6 +73,7 @@ router.get('/:id', async (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/updatefood/(write id)
 ///Updates by Running Find, Edit, then Save  (favoriteFoods:"hamburger")
 router.put("/updatefood/:id", (req, res) => {
     Person.findById(req.params.id, (err, data)=> {
@@ -87,6 +93,7 @@ router.put("/updatefood/:id", (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/findUpdateAge
 //Find a person by Name and set the person's age to 20 use findOneAndUpdate()
 router.put("/findUpdateAge", async(req,res)=> {
        try {
@@ -104,6 +111,7 @@ router.put("/findUpdateAge", async(req,res)=> {
            
 
 //***********************************************************************//
+//http://localhost:6000/person/deleteperson/(write id)
 //Delete one person by the person's _id, use findByIdAndRemove()
 router.delete('/deleteperson/:id', async (req, res)=>{
     try{
@@ -118,7 +126,8 @@ router.delete('/deleteperson/:id', async (req, res)=>{
 
 
 //***********************************************************************//
-//Delete all the people whose name is “Mary”, using Model.remove()
+//http://localhost:6000/person/deletemanyper
+//Delete all the people whose name is “Mary” example, using Model.remove()
 router.delete("/deletemanyper", async (req, res) => {
     try {
       const date = await Person.remove({ name: req.body.name });
@@ -131,6 +140,7 @@ router.delete("/deletemanyper", async (req, res) => {
 
 
 //***********************************************************************//
+//http://localhost:6000/person/find/findchain
 //Chain Search Query Helpers to Narrow Search Results
 router.get("/find/findchain", (req,res)=>{
     Person.find ({ favoriteFoods:{$all:["pasta"] }})
